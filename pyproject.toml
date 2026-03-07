@@ -30,4 +30,4 @@ pypistats = "pypistats_cli.main:cli"
 
 [project.urls]
 Homepage = "https://pypistats.com"
-Repository = "https://github.com/pypistats/pypistats-cli"
+Repository = "https://github.com/diverdale/pypistats-cli"
