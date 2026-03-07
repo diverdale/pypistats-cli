@@ -7,6 +7,7 @@ Powered by [pypistats.com](https://pypistats.com).
 [![PyPI version](https://img.shields.io/pypi/v/pypistats-cli)](https://pypi.org/project/pypistats-cli/)
 [![Python 3.9+](https://img.shields.io/pypi/pyversions/pypistats-cli)](https://pypi.org/project/pypistats-cli/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![PyPI Stats](/api/badges/pypistats-cli?period=month)](/packages/pypistats-cli)
 
 ## Install
 
