@@ -29,7 +29,7 @@ def format_downloads(n: int | float) -> str:
     return str(n)
 
 
-def render_check(pkg_data: dict, health_data: dict, days: int) -> None:
+def render_check(pkg_data: dict, health_data: dict, days: int, summary_data: dict | None = None) -> None:
     console = Console()
 
     metadata = pkg_data.get("metadata", {})
@@ -99,6 +99,14 @@ def render_check(pkg_data: dict, health_data: dict, days: int) -> None:
             lines.append(f"  {v['version']:<12}", style="dim")
             lines.append("█" * bar_width, style="blue")
             lines.append(f"  {pct:.1f}%\n", style="dim")
+
+    # AI Summary (PRO/ENTERPRISE only)
+    if summary_data and summary_data.get("summary"):
+        lines.append("\n")
+        lines.append("  AI Summary", style="bold")
+        lines.append(" (PRO)\n", style="dim")
+        for line in summary_data["summary"].strip().split("\n"):
+            lines.append(f"  {line}\n", style="white")
 
     panel = Panel(
         lines,

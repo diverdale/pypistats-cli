@@ -15,6 +15,20 @@ Powered by [pypistats.com](https://pypistats.com).
 pip install pypistats-cli
 ```
 
+## Setup
+
+An API key is **required**. Get one for free at [pypistats.com](https://pypistats.com):
+
+1. Sign up at [pypistats.com](https://pypistats.com)
+2. Go to your dashboard and generate an API key
+3. Export it in your shell:
+
+```bash
+export PYPISTATS_API_KEY=pyps_your_key_here
+```
+
+Add it to your `~/.bashrc` or `~/.zshrc` to persist across sessions.
+
 ## Usage
 
 ```bash
@@ -56,16 +70,19 @@ pypistats check --help
 - **Health score** (0-100) based on download consistency, popularity, metadata, and growth
 - **Version breakdown** showing adoption percentages
 - **Package metadata** including license, author, and latest version
+- **AI Summary** (PRO/Enterprise) — AI-powered health analysis and insights
 
-## API Key (Optional)
+## Tiers
 
-For higher rate limits, set your API key:
+| Feature | Free | Pro | Enterprise |
+|---------|------|-----|------------|
+| Download stats | Yes | Yes | Yes |
+| Health score | Yes | Yes | Yes |
+| Version breakdown | Yes | Yes | Yes |
+| AI Summary | No | Yes | Yes |
+| Rate limit | 10/min | 60/min | 300/min |
 
-```bash
-export PYPISTATS_API_KEY=your-key-here
-```
-
-Get an API key at [pypistats.com/pricing](https://pypistats.com/pricing).
+Get your API key at [pypistats.com/pricing](https://pypistats.com/pricing).
 
 ## Requirements
 

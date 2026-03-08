@@ -16,8 +16,11 @@ def cli():
 @click.option("--days", default=30, help="Number of days to analyze", show_default=True)
 def check(package: str, days: int):
     """Show download stats, health score, and version info for a package."""
-    from .api import fetch_package, fetch_health, PackageNotFoundError
+    from .config import validate_api_key
+    from .api import fetch_package, fetch_health, fetch_summary, PackageNotFoundError, InvalidApiKeyError
     from .display import render_check
+
+    validate_api_key()
 
     console = Console()
 
@@ -29,9 +32,20 @@ def check(package: str, days: int):
             console.print(f"[red]Package '{package}' not found on pypistats.com[/red]")
             ctx = click.get_current_context()
             ctx.exit(1)
+        except InvalidApiKeyError:
+            console.print("[red]Invalid API key. Check your PYPISTATS_API_KEY environment variable.[/red]")
+            ctx = click.get_current_context()
+            ctx.exit(1)
         except Exception as e:
             console.print(f"[red]Error: {e}[/red]")
             ctx = click.get_current_context()
             ctx.exit(1)
 
-    render_check(pkg_data, health_data, days)
+    # Fetch AI summary if tier supports it
+    summary_data = None
+    tier = pkg_data.get("tier", "FREE")
+    if tier in ("PRO", "ENTERPRISE"):
+        with console.status("[blue]Generating AI summary...", spinner="dots"):
+            summary_data = fetch_summary(package)
+
+    render_check(pkg_data, health_data, days, summary_data)
